@@ -14,10 +14,8 @@ print_help() {
 	echo "	-h  | --help		Prints this help message"
 	echo "	-r  | -R		Recursive"
 	echo "	-dr | --dry-run		Tests file compression but keeps files unchanged on disk"
+	echo "	-q  | --quality	[1-100]	Sets target quality, 100 is best, 1 is worst, default is 85"
 	echo ""
-
-
-
 }
 
 
@@ -56,6 +54,7 @@ fi
 
 RECURSIVE=false
 DO_NOTHING=false
+PRINT_HELP=false
 QUALITY_TARGET=85
 while true;
 do
@@ -63,10 +62,13 @@ do
     		-r | -R ) RECURSIVE=true; shift ;;
     		-dr | --dry-run ) DO_NOTHING=true; shift ;;
     		-h | --help ) PRINT_HELP=true; shift ;;
+		-q | --quality ) QUALITY_TARGET="$2"; shift; shift;;
     		-- ) shift; break ;;
     		* ) break ;;
   	esac
 done
+
+echo "quality target is $QUALITY_TARGET"
 
 if [ $PRINT_HELP = true ]
 then
