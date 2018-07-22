@@ -26,7 +26,7 @@ process_folder() {
 		if [ -f "$file" ] && [ $(file --mime-type -b "$file") = "image/jpeg" ]
 		then
 			quality=$(identify -format '%Q' "$file")
-			if [ $quality > $QUALITY_TARGET ]
+			if [ $quality -gt $QUALITY_TARGET ]
 			then
 				oldsize=$(du -h "$file" | cut -f1)
 				convert -quality $QUALITY_TARGET "$file" "$file.tmp"
